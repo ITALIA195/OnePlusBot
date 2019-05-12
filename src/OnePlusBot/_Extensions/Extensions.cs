@@ -22,5 +22,9 @@ namespace OnePlusBot._Extensions
                     ? $"{DiscordConfig.CDNUrl}avatars/{usr.Id}/{usr.AvatarId}.gif" + append
                     : usr.GetAvatarUrl(ImageFormat.Auto) + append);
         }
+
+        public static string SanitizeMentions(this string str) =>
+        str.Replace("@everyone", "@everyοne", StringComparison.InvariantCultureIgnoreCase)
+       .Replace("@here", "@һere", StringComparison.InvariantCultureIgnoreCase);
     }
 }
