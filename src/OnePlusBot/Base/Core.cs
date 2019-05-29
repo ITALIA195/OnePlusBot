@@ -17,8 +17,6 @@ namespace OnePlusBot.Base
 
         private DiscordSocketClient _bot;
         private string token;
-        private string mainToken;
-        private string betaToken;
 
         public async Task MainAsync()
         {
@@ -31,11 +29,29 @@ namespace OnePlusBot.Base
             _bot.ReactionAdded += OnReactionAdded;
 
             _bot.ReactionRemoved += OnReactionRemoved;
+            
+            if (!File.Exists("messageid.txt"))
+            {
+                File.Create("messageid.txt");
+            }
+            else
+            {
+                using (StreamReader mr = new StreamReader("messageid.txt"))
+                {
+                    if (mr.ReadLine() != null)
+                    {
+                        mr.DiscardBufferedData();
+                        mr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+                        Global.RoleManagerId = ulong.Parse(mr.ReadLine());
+                    }
 
+                }
+
+            }
 
             if (!File.Exists("tokens.txt"))
             {
-                Console.WriteLine("Please paste in your bot's token:");
+                Console.Write("Please paste in your bot's token: ");
 
                 var inputKey = Console.ReadLine();
                 token = inputKey;
@@ -45,26 +61,24 @@ namespace OnePlusBot.Base
                 Console.WriteLine("Development Branch?\n1: Yes 0: No");
                 var userInput = Console.ReadLine();
                 Console.WriteLine();
+
                 if (userInput == "1")
                 {
                     StreamReader reader = new StreamReader("tokens.txt");
                     {
                         reader.ReadLine();
-                        betaToken = reader.ReadLine();
+                        token = reader.ReadLine();
                         reader.Dispose();
                     }
-
-                    token = betaToken;
                 }
                 else if (userInput == "0")
                 {
                     StreamReader reader = new StreamReader("tokens.txt");
                     {
-                        mainToken = reader.ReadLine();
+                        token = reader.ReadLine();
                         reader.Dispose();
                     }
 
-                    token = mainToken;
                 }
                 else
                 {
@@ -104,13 +118,15 @@ namespace OnePlusBot.Base
             var role6 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 5T");
             var role7 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 6");
             var role8 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 6T");
+            var role9 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 7");
+            var role10 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 7 Pro");
             var rolehelper = Guild.Roles.FirstOrDefault(x => x.Name == "Helper");
             var rolenews = Guild.Roles.FirstOrDefault(x => x.Name == "News");
 
 
 
 
-            if (reaction.MessageId == Global.ReactBuilderMsgId)
+            if (reaction.MessageId == Global.RoleManagerId)
             {
 
                 if (reaction.User.Value.IsBot)
@@ -164,6 +180,15 @@ namespace OnePlusBot.Base
                         await (user as IGuildUser).AddRoleAsync(role8);
 
                         break;
+                    case "7_":
+                        await (user as IGuildUser).AddRoleAsync(role9);
+
+                        break;
+
+                    case "7P":
+                        await (user as IGuildUser).AddRoleAsync(role10);
+
+                        break;
 
                     case "❓":
                         await (user as IGuildUser).AddRoleAsync(rolehelper);
@@ -192,13 +217,15 @@ namespace OnePlusBot.Base
             var role6 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 5T");
             var role7 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 6");
             var role8 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 6T");
+            var role9 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 7");
+            var role10 = Guild.Roles.FirstOrDefault(x => x.Name == "OnePlus 7 Pro");
             var rolehelper = Guild.Roles.FirstOrDefault(x => x.Name == "Helper");
             var rolenews = Guild.Roles.FirstOrDefault(x => x.Name == "News");
 
 
 
 
-            if (reaction.MessageId == Global.ReactBuilderMsgId)
+            if (reaction.MessageId == Global.RoleManagerId)
             {
 
                 if (reaction.User.Value.IsBot)
@@ -250,6 +277,16 @@ namespace OnePlusBot.Base
 
                     case "6T":
                         await (user as IGuildUser).RemoveRoleAsync(role8);
+
+                        break;
+
+                    case "7_":
+                        await (user as IGuildUser).RemoveRoleAsync(role9);
+
+                        break;
+
+                    case "7P":
+                        await (user as IGuildUser).RemoveRoleAsync(role10);
 
                         break;
 
