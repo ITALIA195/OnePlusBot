@@ -23,10 +23,10 @@ namespace OnePlusBot.Modules
             await Context.Message.AddReactionAsync(EmoteTrue);
             await modlog.EmbedAsync(new EmbedBuilder().WithColor(9896005)
                 .WithTitle("⛔️ Banned User")
-                .AddField(efb => efb.WithName("Username").WithValue(("<@"+name.ToString())+">").WithIsInline(true))
+                .AddField(efb => efb.WithName("Username").WithValue(("<@" + name.ToString()) + ">").WithIsInline(true))
                 .AddField(efb => efb.WithName("ID").WithValue(name.ToString()).WithIsInline(true)));
         }
-    
+
         [Command("ban", RunMode = RunMode.Async)]
         [Summary("Bans specified user.")]
         [RequireBotPermission(GuildPermission.BanMembers)]

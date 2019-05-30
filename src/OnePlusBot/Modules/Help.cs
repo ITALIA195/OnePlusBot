@@ -8,7 +8,7 @@ using Discord.Commands;
 
 namespace OnePlusBot.Modules
 {
-   public class HelpModule : ModuleBase<SocketCommandContext>
+    public class HelpModule : ModuleBase<SocketCommandContext>
     {
         private readonly CommandService _commands;
         private readonly IServiceProvider _services;
@@ -24,7 +24,7 @@ namespace OnePlusBot.Modules
         public async Task Help(string path = "")
         {
             Random random = new Random();
-            int r= random.Next(0, 255);
+            int r = random.Next(0, 255);
             int g = random.Next(0, 255);
             int b = random.Next(0, 255);
 

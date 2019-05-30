@@ -37,7 +37,7 @@ namespace OnePlusBot.Base
         {
             if (!string.IsNullOrEmpty(result?.ErrorReason))
             {
-                await context.Channel.EmbedAsync(new EmbedBuilder().WithColor(9896005).WithDescription("⚠ "+ result.ErrorReason).WithTitle("" + context.Message.Author));
+                await context.Channel.EmbedAsync(new EmbedBuilder().WithColor(9896005).WithDescription("⚠ " + result.ErrorReason).WithTitle("" + context.Message.Author));
             }
         }
 
@@ -46,9 +46,9 @@ namespace OnePlusBot.Base
             Global.RoleManagerId = message.Id;
             using (StreamWriter mw = new StreamWriter("messageid.txt"))
             {
-                    mw.WriteLine(Global.RoleManagerId);
+                mw.WriteLine(Global.RoleManagerId);
             }
-            
+
             await message.AddReactionsAsync(new Emoji[]
             {
                 new Emoji(":1_:574655515586592769"),
@@ -69,7 +69,7 @@ namespace OnePlusBot.Base
 
         private async Task HandleCommandAsync(SocketMessage messageParam)
         {
-            
+
             if (!(messageParam is SocketUserMessage message)) return;
 
             int argPos = 0;
@@ -96,7 +96,7 @@ namespace OnePlusBot.Base
                         }
                     }
 
-                    else if(messageParam.Channel.Id == infoChannel.Id)
+                    else if (messageParam.Channel.Id == infoChannel.Id)
                     {
 
                         if (messageParam.Embeds.Count == 1)
@@ -107,8 +107,9 @@ namespace OnePlusBot.Base
                     }
                 }
 
-            } catch
-            {}
+            }
+            catch
+            { }
 
             if (!(message.HasCharPrefix(';', ref argPos) ||
                 message.HasMentionPrefix(_bot.CurrentUser, ref argPos)) ||

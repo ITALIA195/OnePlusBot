@@ -29,7 +29,7 @@ namespace OnePlusBot.Base
             _bot.ReactionAdded += OnReactionAdded;
 
             _bot.ReactionRemoved += OnReactionRemoved;
-            
+
             if (!File.Exists("messageid.txt"))
             {
                 File.Create("messageid.txt");

@@ -21,13 +21,13 @@ namespace OnePlusBot.Modules
             .WithTitle("...a new report has emerged from outer space!")
             .WithColor(9896005)
             .WithTimestamp(Context.Message.Timestamp)
-            .WithFooter(footer => 
+            .WithFooter(footer =>
             {
-              footer
-                // TO DO: Implement incremential Cases with database.
-                   .WithText("Case # (WIP)")
-                   .WithIconUrl("https://a.kyot.me/0WPy.png");
-             })
+                footer
+                     // TO DO: Implement incremential Cases with database.
+                     .WithText("Case # (WIP)")
+                     .WithIconUrl("https://a.kyot.me/0WPy.png");
+            })
             .WithThumbnailUrl(user.RealAvatarUrl().ToString())
             .WithAuthor(author =>
             {
@@ -38,15 +38,15 @@ namespace OnePlusBot.Modules
 
             .AddField("Reported User", user)
             .AddField("Reported by", reporter)
-            .AddField("Location of the incident", Context.Message.Channel.Name + " [Warp!](https://discordapp.com/channels/"+ Context.Guild.Id + "/" + Context.Channel.Id + "/" + Context.Message.Id + ")")
+            .AddField("Location of the incident", Context.Message.Channel.Name + " [Warp!](https://discordapp.com/channels/" + Context.Guild.Id + "/" + Context.Channel.Id + "/" + Context.Message.Id + ")")
             .AddField("Reason", reason);
 
 
             var embed = builder.Build();
-            await reportChannel.SendMessageAsync(null,embed: embed).ConfigureAwait(false);
+            await reportChannel.SendMessageAsync(null, embed: embed).ConfigureAwait(false);
 
             //await Context.Message.DeleteAsync();
-            await Context.Channel.EmbedAsync(new EmbedBuilder().WithColor(9896005).WithDescription(user+" Successfully reported"));
+            await Context.Channel.EmbedAsync(new EmbedBuilder().WithColor(9896005).WithDescription(user + " Successfully reported"));
 
 
 
